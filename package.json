@@ -1,6 +1,6 @@
 {
   "name": "booky",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "slackbot to search a gitbook with algolia",
   "main": "index.js",
   "dependencies": {
