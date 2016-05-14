@@ -22,10 +22,10 @@ const what = new Command(/search/, (slack, config) => {
               const text = hit._highlightResult.body.value.replace(/(<em>)/igm, '*').replace(/(<\/em>)/igm, '*');
               message.addAttachment({title:hit.title, title_link:config.gitbook.url + hit.url, text:text});
             });
-            response.sendTo(slack.user_name, message, config);
+            response.sendTo(slack.user_name, message, config.slack);
           } else {
             const none = new Message(`sorry, i couldn't find anything that looks related to _${query}_`);
-            response.sendTo(slack.user_name, none, config);
+            response.sendTo(slack.user_name, none, config.slack);
           }
         }).catch((err) => {
           resolve(new Message(`sorry, search failed with ${err}`));
