@@ -1,0 +1,17 @@
+module.exports = {
+  slack: {
+    apiToken: '',
+    token: '',
+    webhook: '',
+    botName: 'booky',
+    botIconEmoji: 'book'
+  },
+  algolia: {
+    applicationId: '',
+    apiKey: '',
+    index: ''
+  },
+  gitbook: {
+    url: ''
+  }
+};

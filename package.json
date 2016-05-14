@@ -1,0 +1,16 @@
+{
+  "name": "booky",
+  "version": "0.1.0",
+  "description": "slackbot to search a gitbook with algolia",
+  "main": "index.js",
+  "dependencies": {
+    "algoliasearch": "^3.14.1",
+    "express": "^4.13.4",
+    "request": "^2.72.0",
+    "slack-node": "^0.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "author": "eleith",
+  "license": "Apache"
+}
