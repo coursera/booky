@@ -32,7 +32,7 @@ module.exports = (config) => {
           commandRun = true;
           command.run(params, config).then((message) => {
             if (message) {
-              res.json(message.getResponse());
+              res.json(message);
             } else {
               res.send('');
             }
@@ -49,7 +49,7 @@ module.exports = (config) => {
         if (commandDefault) {
           commandDefault.run(params, config).then((message) => {
             if (message) {
-              res.json(message.getResponse());
+              res.json(message);
             } else {
               res.send('');
             }

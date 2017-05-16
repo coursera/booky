@@ -1,6 +1,8 @@
 module.exports = {
   slack: {
     apiToken: '',
+    clientId: '',
+    clientSecret: '',
     token: '',
     webhook: '',
     botName: 'booky',

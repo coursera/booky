@@ -1,3 +1,5 @@
+var request = require('request');
+
 var Command = function(matcher, handler) {
   this.matcher = matcher;
   this.handler = handler;
@@ -11,8 +13,8 @@ Command.prototype.setHelp = function(command, text) {
   };
 };
 
-Command.prototype.run = function(slack, config) {
-  return this.handler(slack, config);  
+Command.prototype.run = function(slack, jira, context) {
+  return this.handler(slack, jira, context, this);
 };
 
 Command.prototype.getHelp = function() {
@@ -28,13 +30,41 @@ Command.prototype.isDefault = function() {
 };
 
 Command.prototype.matches = function(command) {
-  if (this.matcher instanceof RegExp) {
-    return this.matcher.test(command);
-  } else if (this.matcher instanceof Function) {
-    return this.matcher(command);
-  } else {
-    return this.matcher === command;
+  return (this.matcher instanceof RegExp) ? this.matcher.test(command) : this.matcher === command;
+};
+
+Command.prototype.buildResponse = function(text, response_type, attachments) {
+  var json = {
+    text: text
   }
+
+  if (response_type) {
+    json.response_type = response_type;
+  }
+
+  if (attachments) {
+    json.attachments = attachments;
+  }
+
+  return json;
+};
+
+Command.prototype.reply = function(url, text, response_type, attachments) {
+  var options = {
+    url: url,
+    method: 'POST',
+    json: this.buildResponse(text, response_type, attachments)
+  };
+
+  return new Promise((resolve, reject) => { 
+    request(options, (error, res, body) => { 
+      if (error) {
+        reject(error);
+      } else {
+        resolve(res);
+      }
+    });
+  });
 };
 
 module.exports = Command;
