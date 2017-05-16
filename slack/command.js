@@ -30,7 +30,13 @@ Command.prototype.isDefault = function() {
 };
 
 Command.prototype.matches = function(command) {
-  return (this.matcher instanceof RegExp) ? this.matcher.test(command) : this.matcher === command;
+  if (this.matcher instanceof RegExp) {
+    return this.matcher.test(command);
+  } else if (this.matcher instanceof Function) {
+    return this.matcher(command);
+  } else {
+    return this.matcher === command;
+  }
 };
 
 Command.prototype.buildResponse = function(text, response_type, attachments) {
